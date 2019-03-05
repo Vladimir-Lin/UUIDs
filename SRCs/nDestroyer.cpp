@@ -17,3 +17,8 @@ bool Destroyer::Destructor(void)
 {
   return true ;
 }
+
+void * Destroyer::Register(void * package)
+{
+  return nullptr ;
+}

@@ -69,11 +69,13 @@ class UUIDs_EXPORT Destroyer
 {
   public:
 
-    explicit     Destroyer  (void) ;
-    virtual     ~Destroyer  (void) ;
+    explicit       Destroyer  (void) ;
+    virtual       ~Destroyer  (void) ;
 
-    virtual bool Recycling  (void) ;
-    virtual bool Destructor (void) ;
+    virtual bool   Recycling  (void) ;
+    virtual bool   Destructor (void) ;
+
+    virtual void * Register   (void * package) ;
 
   protected:
 
