@@ -23,6 +23,8 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include <string>
+
 typedef int64_t  TUID ;
 typedef uint64_t SUID ;
 typedef int32_t  CUID ;
@@ -88,23 +90,33 @@ class Convoy : public Destroyer
 {
   public:
 
-    explicit       Convoy      (void) ;
-    virtual       ~Convoy      (void) ;
+    explicit         Convoy      (void) ;
+    virtual         ~Convoy      (void) ;
 
-    virtual bool   Interrupt   (void) ;
-    virtual bool   Recycling   (void) ;
-    virtual bool   Destructor  (void) ;
+    virtual bool     Interrupt   (void) ;
+    virtual bool     Recycling   (void) ;
+    virtual bool     Destructor  (void) ;
 
-    virtual void * Register    (void * package) ;
+    virtual void   * Register    (void * package) ;
 
-    virtual int    Join        (Destroyer * destroyer) ;
-    virtual int    Remove      (Destroyer * destroyer) ;
+    virtual int      Join        (Destroyer * destroyer) ;
+    virtual int      Remove      (Destroyer * destroyer) ;
 
-    virtual bool   Discontinue (void) ; // Stop All
-    virtual bool   Eliminate   (void) ; // Clean All
-    virtual int    Survived    (void) const ;
+    virtual bool     Prepare     (void) ;
+    virtual bool     Discontinue (void) ; // Stop All
+    virtual bool     Eliminate   (void) ; // Clean All
+    virtual int      Survived    (void) const ;
+
+    static  bool     add         (std::string key,Convoy * convoy) ; // add Convoy By Key
+    static  bool     remove      (std::string key) ; // Remove Convoy By Key
+    static  Convoy * find        (std::string key) ; // find Convoy
+
+    static  int      join        (std::string key,Destroyer * destroyer) ;
+    static  int      remove      (std::string key,Destroyer * destroyer) ;
 
   protected:
+
+    void * PrivatePacket ;
 
   private:
 

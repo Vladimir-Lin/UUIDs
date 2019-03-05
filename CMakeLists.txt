@@ -47,12 +47,13 @@ endif(MSVC)
 
 include_directories(include)
 
-set(HEADERS include/UUIDs.hpp)
+set(HEADERS include/UUIDs.hpp SRCs/PrivateUUIDs.hpp)
 
 set(CORES
   SRCs/UUIDs.cpp
   SRCs/nDestroyer.cpp
-  SRCs/Convoy.cpp)
+  SRCs/Convoy.cpp
+  SRCs/PrivateConvoy.cpp)
 
 # Handling pkg-config file
 configure_file(UUIDs.pc.in UUIDs.pc @ONLY)
