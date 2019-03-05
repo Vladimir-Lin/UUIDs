@@ -72,10 +72,37 @@ class UUIDs_EXPORT Destroyer
     explicit       Destroyer  (void) ;
     virtual       ~Destroyer  (void) ;
 
+    virtual bool   Interrupt  (void) ;
     virtual bool   Recycling  (void) ;
     virtual bool   Destructor (void) ;
 
     virtual void * Register   (void * package) ;
+
+  protected:
+
+  private:
+
+} ;
+
+class Convoy : public Destroyer
+{
+  public:
+
+    explicit       Convoy      (void) ;
+    virtual       ~Convoy      (void) ;
+
+    virtual bool   Interrupt   (void) ;
+    virtual bool   Recycling   (void) ;
+    virtual bool   Destructor  (void) ;
+
+    virtual void * Register    (void * package) ;
+
+    virtual int    Join        (Destroyer * destroyer) ;
+    virtual int    Remove      (Destroyer * destroyer) ;
+
+    virtual bool   Discontinue (void) ; // Stop All
+    virtual bool   Eliminate   (void) ; // Clean All
+    virtual int    Survived    (void) const ;
 
   protected:
 

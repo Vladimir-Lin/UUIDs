@@ -16,6 +16,7 @@ HEADERS     += $$SRCROOT/include/UUIDs.hpp
 
 SOURCES     += $$SRCPATH/UUIDs.cpp
 SOURCES     += $$SRCPATH/nDestroyer.cpp
+SOURCES     += $$SRCPATH/Convoy.cpp
 
 OTHER_FILES += $$SRCROOT/CMakeLists.txt
 OTHER_FILES += $$SRCROOT/*.bat

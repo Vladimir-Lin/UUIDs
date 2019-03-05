@@ -51,7 +51,8 @@ set(HEADERS include/UUIDs.hpp)
 
 set(CORES
   SRCs/UUIDs.cpp
-  SRCs/nDestroyer.cpp)
+  SRCs/nDestroyer.cpp
+  SRCs/Convoy.cpp)
 
 # Handling pkg-config file
 configure_file(UUIDs.pc.in UUIDs.pc @ONLY)

@@ -8,6 +8,11 @@ Destroyer::~Destroyer(void)
 {
 }
 
+bool Destroyer::Interrupt(void)
+{
+  return true ;
+}
+
 bool Destroyer::Recycling(void)
 {
   return true ;
