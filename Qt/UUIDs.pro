@@ -11,14 +11,15 @@ SRCROOT      = ../
 SRCPATH      = $$SRCROOT/SRCs
 
 INCLUDEPATH  = $$SRCROOT/include
+INCLUDEPATH += $$SRCPATH/Windows
 
 HEADERS     += $$SRCROOT/include/UUIDs.hpp
-HEADERS     += $$SRCPATH/PrivateUUIDs.hpp
+HEADERS     += $$SRCPATH/Windows/PrivateUUIDs.hpp
 
 SOURCES     += $$SRCPATH/UUIDs.cpp
 SOURCES     += $$SRCPATH/nDestroyer.cpp
 SOURCES     += $$SRCPATH/Convoy.cpp
-SOURCES     += $$SRCPATH/PrivateConvoy.cpp
+SOURCES     += $$SRCPATH/Windows/PrivateConvoy.cpp
 
 OTHER_FILES += $$SRCROOT/CMakeLists.txt
 OTHER_FILES += $$SRCROOT/*.bat

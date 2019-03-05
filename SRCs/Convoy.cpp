@@ -1,28 +1,75 @@
 #include "UUIDs.hpp"
 #include "PrivateUUIDs.hpp"
 
+typedef struct              {
+  ManageDestroyers * manage ;
+} PrivateDestroyers         ;
+
+typedef struct    {
+  int      Type   ;
+  Convoy * convoy ;
+} ConvoyGuard     ;
+
 static std::map<std::string,Convoy *> StaticConvoy ;
 
 Convoy:: Convoy        ( void    )
        : Destroyer     (         )
        , PrivatePacket ( nullptr )
 {
+  ConvoyGuard * cg = new ConvoyGuard ( ) ;
+  cg -> Type   = 0                       ;
+  cg -> convoy = this                    ;
+  PrivateGuard = (void *) cg             ;
+}
+
+Convoy:: Convoy        ( std::string key )
+       : Destroyer     (                 )
+       , PrivatePacket ( nullptr         )
+       , ConvoyKey     ( key             )
+{
+  ConvoyGuard * cg = new ConvoyGuard ( ) ;
+  cg -> Type   = 0                       ;
+  cg -> convoy = this                    ;
+  PrivateGuard = (void *) cg             ;
 }
 
 Convoy::~Convoy(void)
 {
-  if ( nullptr != PrivatePacket ) {
-  }
+  if ( nullptr != this -> PrivatePacket )                        {
+    PrivateDestroyers * pd = (PrivateDestroyers *) PrivatePacket ;
+    if ( nullptr != pd -> manage )                               {
+      delete pd -> manage                                        ;
+      pd -> manage = nullptr                                     ;
+    }                                                            ;
+    delete pd                                                    ;
+    this -> PrivatePacket = nullptr                              ;
+  }                                                              ;
+  ////////////////////////////////////////////////////////////////
+  if ( nullptr != this -> PrivateGuard )                         {
+    ConvoyGuard * cg = (ConvoyGuard *) this -> PrivateGuard      ;
+    delete cg                                                    ;
+    this -> PrivateGuard = nullptr                               ;
+  }                                                              ;
+}
+
+void Convoy::setKey(std::string key)
+{
+  ConvoyKey = key ;
+}
+
+std::string Convoy::Key(void) const
+{
+  return ConvoyKey ;
 }
 
 bool Convoy::Interrupt(void)
 {
-  return true ;
+  return this -> Discontinue ( ) ;
 }
 
 bool Convoy::Recycling(void)
 {
-  return true ;
+  return this -> Eliminate ( ) ;
 }
 
 bool Convoy::Destructor(void)
@@ -35,34 +82,79 @@ void * Convoy::Register(void *)
   return nullptr ;
 }
 
-int Convoy::Join(Destroyer *)
+int Convoy::Join(Destroyer * destroyer)
 {
-  return 0 ;
+  if ( nullptr == this -> PrivatePacket ) return 0                     ;
+  PrivateDestroyers * pd = (PrivateDestroyers *) this -> PrivatePacket ;
+  if ( nullptr == pd   -> manage        ) return 0                     ;
+  return int ( pd -> manage -> add ( destroyer ) )                     ;
 }
 
-int Convoy::Remove(Destroyer *)
+int Convoy::Remove(Destroyer * destroyer)
 {
-  return 0 ;
+  if ( nullptr == this -> PrivatePacket ) return 0                     ;
+  PrivateDestroyers * pd = (PrivateDestroyers *) this -> PrivatePacket ;
+  if ( nullptr == pd   -> manage        ) return 0                     ;
+  return int ( pd -> manage -> remove ( destroyer ) )                  ;
+}
+
+Destroyer * Convoy::Visit(int index)
+{
+  if ( nullptr == this -> PrivatePacket ) return nullptr               ;
+  PrivateDestroyers * pd = (PrivateDestroyers *) this -> PrivatePacket ;
+  if ( nullptr == pd   -> manage        ) return nullptr               ;
+  return pd -> manage -> at ( index )                                  ;
+}
+
+void * Convoy::Guard(void)
+{
+  return this -> PrivateGuard ;
 }
 
 bool Convoy::Prepare(void)
 {
-  return true ;
+  if ( nullptr != this -> PrivatePacket ) return false ;
+  PrivateDestroyers * pd = new PrivateDestroyers ( )   ;
+  pd -> manage = new ManageDestroyers ( )              ;
+  this -> PrivatePacket = (void *) pd                  ;
+  return true                                          ;
 }
 
 bool Convoy::Discontinue(void)
 {
-  return true ;
+  if ( nullptr == this -> PrivatePacket ) return false                 ;
+  PrivateDestroyers * pd = (PrivateDestroyers *) this -> PrivatePacket ;
+  //////////////////////////////////////////////////////////////////////
+  if ( nullptr != pd -> manage )                                       {
+    pd -> manage -> discontinue ( )                                    ;
+  }                                                                    ;
+  //////////////////////////////////////////////////////////////////////
+  return true                                                          ;
 }
 
 bool Convoy::Eliminate(void)
 {
-  return true ;
+  if ( nullptr == this -> PrivatePacket ) return false                 ;
+  PrivateDestroyers * pd = (PrivateDestroyers *) this -> PrivatePacket ;
+  //////////////////////////////////////////////////////////////////////
+  if ( nullptr != pd -> manage )                                       {
+    pd -> manage -> clean ( )                                          ;
+    ////////////////////////////////////////////////////////////////////
+    delete pd -> manage                                                ;
+    pd -> manage = nullptr                                             ;
+  }                                                                    ;
+  delete pd                                                            ;
+  this -> PrivatePacket = nullptr                                      ;
+  //////////////////////////////////////////////////////////////////////
+  return true                                                          ;
 }
 
 int Convoy::Survived(void) const
 {
-  return 0 ;
+  if ( nullptr == this -> PrivatePacket ) return 0                     ;
+  PrivateDestroyers * pd = (PrivateDestroyers *) this -> PrivatePacket ;
+  if ( nullptr == pd   -> manage        ) return 0                     ;
+  return int ( pd -> manage -> count ( ) )                             ;
 }
 
 bool Convoy::add(std::string key,Convoy * convoy)

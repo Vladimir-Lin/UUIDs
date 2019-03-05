@@ -46,6 +46,7 @@ if(MSVC)
 endif(MSVC)
 
 include_directories(include)
+include_directories(SRCs/Windows)
 
 set(HEADERS include/UUIDs.hpp SRCs/Windows/PrivateUUIDs.hpp)
 

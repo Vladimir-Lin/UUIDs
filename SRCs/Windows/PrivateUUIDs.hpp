@@ -9,8 +9,41 @@
 
 #include "UUIDs.hpp"
 
+#include <Windows.h>
+
 #include <list>
 #include <map>
 
+class ManageDestroyers
+{
+  public:
+
+    std::list<Destroyer *> Destroyers ;
+
+    explicit    ManageDestroyers (void) ;
+    virtual    ~ManageDestroyers (void) ;
+
+    size_t      count            (void) ;
+
+    Destroyer * at               (int index) ;
+
+    size_t      add              (Destroyer * destroyer) ;
+    size_t      remove           (Destroyer * destroyer) ;
+
+    void        clean            (void) ;
+    void        discontinue      (void) ;
+
+  protected:
+
+    bool        exists           (Destroyer * destroyer) ;
+
+    void        lock             (void) ;
+    void        unlock           (void) ;
+
+  private:
+
+    CRITICAL_SECTION mutex ;
+
+} ;
 
 #endif
