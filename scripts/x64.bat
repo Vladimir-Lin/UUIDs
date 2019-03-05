@@ -1,39 +1,30 @@
-@echo off
+rem @echo off
 
 set ARCHX=x64
-set COMPILE=%1
+set COMPILEPATH=%1
 set BTYPE=%2
 set DLLX=%3
 set DOSTATIC=%4
 set DOSHARED=%5
-
-call %~dp0\..\settings.bat
-call %VC_PATH%\vcvars64.bat
-
 set TARGET=%NAME%-%ARCHX%-%BTYPE%-%DLLX%
-set SOURCEDIR=%COMPILE%\%PACKAGE%
-set INSTALLDIR=-DCMAKE_INSTALL_PREFIX=%COMPILE%\%TARGET%
-set BUILDTYPE=-DCMAKE_CONFIGURATION_TYPES=%BTYPE%
-set PARAMETERS=-DBUILD_SHARED_LIBS=%DOSHARED%
-set PLATFORMS=-G %VC_CMAKE%
+
+call %~dp0\..\..\..\settings.bat
+call %VC_PATH%\vcvars64.bat
 
 mkdir %TARGET%
 mkdir %NAME%-compile-%ARCHX%-%BTYPE%-%DLLX%
 
-cd %COMPILE%\%NAME%-compile-%ARCHX%-%BTYPE%-%DLLX%
+cd %COMPILEPATH%\%NAME%-compile-%ARCHX%-%BTYPE%-%DLLX%
 
-cmake %PLATFORMS% %SOURCEDIR% %INSTALLDIR% %BUILDTYPE% %PARAMETERS%
+cmake -G %VC_CMAKE% %UUIDS% -DCMAKE_INSTALL_PREFIX=%COMPILEPATH%\%TARGET% -DCMAKE_CONFIGURATION_TYPES=%BTYPE% -DCMAKE_BUILD_TYPE=%BTYPE% -DBUILD_SHARED_LIBS=%DOSHARED%
 
 devenv %NAME%.sln /Build
 devenv %NAME%.sln /Build %BTYPE% /Project INSTALL
 
 cd ..
-
 7z a %TARGET%.7z %TARGET%
-
-del /Q %ROOT%\%TARGET%.7z
-move /Y %TARGET%.7z %ROOT%
+del /Q %UUIDS%\Packages\%TARGET%.7z
+move /Y %TARGET%.7z %UUIDS%\Packages
 rd /S /Q %TARGET%
 rd /S /Q %NAME%-compile-%ARCHX%-%BTYPE%-%DLLX%
-
 exit

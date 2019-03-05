@@ -1,30 +1,25 @@
 # Author : Foxman A.K.A. Vladimir Lin <lin.vladimir@gmail.com>
-# Lastest update : 2019/03/03 17:01
+# Lastest update : 2019/03/05 09:38
 
 QT          -= gui
-TARGET       = libstardate
+TARGET       = UUIDs
 TEMPLATE     = lib
 DEFINES     += QT_DEPRECATED_WARNINGS
-DEFINES     += EXPORT_LIBSTARDATE
+DEFINES     += EXPORT_UUIDS
 
 SRCROOT      = ../
-SRCPATH      = $$SRCROOT/src
+SRCPATH      = $$SRCROOT/SRCs
 
 INCLUDEPATH  = $$SRCROOT/include
 
-HEADERS     += $$SRCROOT/include/stardate.hpp
+HEADERS     += $$SRCROOT/include/UUIDs.hpp
 
-SOURCES     += $$SRCPATH/stardate.cpp
-SOURCES     += $$SRCPATH/startime.cpp
-SOURCES     += $$SRCPATH/frequency.cpp
-SOURCES     += $$SRCPATH/estimator.cpp
-SOURCES     += $$SRCPATH/usleep.cpp
-SOURCES     += $$SRCPATH/hardware.cpp
+SOURCES     += $$SRCPATH/UUIDs.cpp
+SOURCES     += $$SRCPATH/nDestroyer.cpp
 
 OTHER_FILES += $$SRCROOT/CMakeLists.txt
-OTHER_FILES += $$SRCROOT/CiosTime.bat
-OTHER_FILES += $$SRCROOT/install.bat
-OTHER_FILES += $$SRCROOT/libstardate.pc.in
+OTHER_FILES += $$SRCROOT/*.bat
+OTHER_FILES += $$SRCROOT/*.pc.in
 OTHER_FILES += $$SRCROOT/VERSION.txt
 
 OTHER_FILES += $$SRCROOT/projects/*

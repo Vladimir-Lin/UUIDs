@@ -1,13 +1,13 @@
-name=libstardate
+name=UUIDs
 libdir=$${LIBPATH}
 includedir=$${INCLUDEPATH}
 lib=${name}.lib
 file=${libdir}/${lib}
 
-Name: libstardate
-Version: 0.0.1
-Description: Stellar Time Supports for CIOS
-URL: https://github.com/Vladimir-Lin/CiosTime
+Name: UUIDs
+Version: @VERSION@
+Description: CIOS version of SUID/UUIDs operations
+URL: https://github.com/Vladimir-Lin/UUIDs
 Libs: -L${libdir} -l${name}
 Cflags: -I${includedir}
 
