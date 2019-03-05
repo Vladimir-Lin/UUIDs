@@ -6,7 +6,7 @@ Destroyer:: Destroyer(void)
 
 Destroyer::~Destroyer(void)
 {
-  this -> Destructor ( ) ;
+  Destructor ( ) ;
 }
 
 bool Destroyer::Interrupt(void)

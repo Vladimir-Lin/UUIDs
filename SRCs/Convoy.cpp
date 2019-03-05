@@ -64,12 +64,12 @@ std::string Convoy::Key(void) const
 
 bool Convoy::Interrupt(void)
 {
-  return this -> Discontinue ( ) ;
+  return Discontinue ( ) ;
 }
 
 bool Convoy::Recycling(void)
 {
-  return this -> Eliminate ( ) ;
+  return Eliminate ( ) ;
 }
 
 bool Convoy::Destructor(void)
