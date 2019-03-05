@@ -157,14 +157,14 @@ int Convoy::Survived(void) const
   return int ( pd -> manage -> count ( ) )                             ;
 }
 
-bool Convoy::add(std::string key,Convoy * convoy)
+bool Convoyer::add(std::string key,Convoy * convoy)
 {
   if ( nullptr == convoy ) return false ;
   StaticConvoy [ key ] = convoy         ;
   return true                           ;
 }
 
-bool Convoy::remove(std::string key)
+bool Convoyer::remove(std::string key)
 {
   std::map<std::string,Convoy *>::iterator it      ;
   it = StaticConvoy . find ( key )                 ;
@@ -173,7 +173,7 @@ bool Convoy::remove(std::string key)
   return true                                      ;
 }
 
-Convoy * Convoy::find(std::string key)
+Convoy * Convoyer::find(std::string key)
 {
   std::map<std::string,Convoy *>::iterator it        ;
   it = StaticConvoy . find ( key )                   ;
@@ -181,16 +181,16 @@ Convoy * Convoy::find(std::string key)
   return StaticConvoy [ key ]                        ;
 }
 
-int Convoy::join(std::string key,Destroyer * destroyer)
+int Convoyer::join(std::string key,Destroyer * destroyer)
 {
-  Convoy * convoy = Convoy::find ( key ) ;
-  if ( nullptr == convoy ) return 0      ;
-  return  convoy -> Join ( destroyer )   ;
+  Convoy * convoy = Convoyer::find ( key ) ;
+  if ( nullptr == convoy ) return 0        ;
+  return  convoy -> Join ( destroyer )     ;
 }
 
-int Convoy::remove(std::string key,Destroyer * destroyer)
+int Convoyer::remove(std::string key,Destroyer * destroyer)
 {
-  Convoy * convoy = Convoy::find ( key ) ;
-  if ( nullptr == convoy ) return 0      ;
-  return  convoy -> Remove ( destroyer ) ;
+  Convoy * convoy = Convoyer::find ( key ) ;
+  if ( nullptr == convoy ) return 0        ;
+  return  convoy -> Remove ( destroyer )   ;
 }

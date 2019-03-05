@@ -113,13 +113,6 @@ class Convoy : public Destroyer
     virtual void        setKey      (std::string key) ;
     virtual std::string Key         (void) const ;
 
-    static  UUIDs_EXPORT bool     add    (std::string key,Convoy * convoy) ; // add Convoy By Key
-    static  UUIDs_EXPORT bool     remove (std::string key) ; // Remove Convoy By Key
-    static  UUIDs_EXPORT Convoy * find   (std::string key) ; // find Convoy
-
-    static  UUIDs_EXPORT int      join   (std::string key,Destroyer * destroyer) ;
-    static  UUIDs_EXPORT int      remove (std::string key,Destroyer * destroyer) ;
-
   protected:
 
     void      * PrivatePacket ;
@@ -129,5 +122,16 @@ class Convoy : public Destroyer
   private:
 
 } ;
+
+namespace Convoyer
+{
+
+extern UUIDs_EXPORT bool     add    (std::string key,Convoy * convoy) ; // add Convoy By Key
+extern UUIDs_EXPORT bool     remove (std::string key) ; // Remove Convoy By Key
+extern UUIDs_EXPORT Convoy * find   (std::string key) ; // find Convoy
+extern UUIDs_EXPORT int      join   (std::string key,Destroyer * destroyer) ;
+extern UUIDs_EXPORT int      remove (std::string key,Destroyer * destroyer) ;
+
+}
 
 #endif
