@@ -39,15 +39,24 @@ bool ManageDestroyers::exists(Destroyer * destroyer)
 
 Destroyer * ManageDestroyers::at(int index)
 {
-  Destroyer * destroyer = nullptr ;
-  std::list<Destroyer *>::iterator it                  ;
-  lock   ( )                                           ;
-  it    = std::next ( Destroyers . begin ( ) , index ) ;
-  if ( it != Destroyers . end ( ) )                    {
-    destroyer = (*it)                                  ;
-  }                                                    ;
-  unlock ( )                                           ;
-  return destroyer                                     ;
+  Destroyer * destroyer = nullptr     ;
+  std::list<Destroyer *>::iterator it ;
+  /////////////////////////////////////
+  lock   ( )                          ;
+  /////////////////////////////////////
+  it = Destroyers . begin ( )         ;
+  if ( 0 == index )                   {
+    destroyer = (*it)                 ;
+  } else                              {
+    it = std::next ( it , index - 1 ) ;
+    if ( it != Destroyers . end ( ) ) {
+      destroyer = (*it)               ;
+    }                                 ;
+  }                                   ;
+  /////////////////////////////////////
+  unlock ( )                          ;
+  /////////////////////////////////////
+  return destroyer                    ;
 }
 
 size_t ManageDestroyers::add(Destroyer * destroyer)
