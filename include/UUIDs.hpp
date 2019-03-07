@@ -86,7 +86,7 @@ class UUIDs_EXPORT Destroyer
 
 } ;
 
-class Convoy : public Destroyer
+class UUIDs_EXPORT Convoy : public Destroyer
 {
   public:
 
