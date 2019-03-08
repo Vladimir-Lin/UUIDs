@@ -115,7 +115,7 @@ class UUIDs_EXPORT Convoy : public Destroyer
     virtual bool        Eliminate   (void) ; // Clean All
     virtual int         Survived    (void) const ;
 
-    virtual void        setKey      (std::string key) ;
+    virtual void        setKeys     (std::string convoyKey,std::string dataKey) ;
     virtual std::string Key         (void) const ;
 
     static  bool        add         (std::string key,Convoy * convoy) ; // add Convoy By Key
@@ -131,6 +131,7 @@ class UUIDs_EXPORT Convoy : public Destroyer
     void      * PrivatePacket ;
     void      * PrivateGuard  ;
     std::string ConvoyKey     ;
+    std::string DataKey       ;
 
   private:
 

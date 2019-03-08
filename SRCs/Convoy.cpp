@@ -39,26 +39,21 @@ Convoy:: Convoy        ( std::string key )
 
 Convoy::~Convoy(void)
 {
-  if ( nullptr != this -> PrivatePacket )                        {
-    PrivateDestroyers * pd = (PrivateDestroyers *) PrivatePacket ;
-    if ( nullptr != pd -> manage )                               {
-      delete pd -> manage                                        ;
-      pd -> manage = nullptr                                     ;
-    }                                                            ;
-    delete pd                                                    ;
-    this -> PrivatePacket = nullptr                              ;
-  }                                                              ;
-  ////////////////////////////////////////////////////////////////
-  if ( nullptr != this -> PrivateGuard )                         {
-    ConvoyGuard * cg = (ConvoyGuard *) this -> PrivateGuard      ;
-    delete cg                                                    ;
-    this -> PrivateGuard = nullptr                               ;
-  }                                                              ;
+  Destructor ( ) ;
 }
 
-void Convoy::setKey(std::string key)
+void Convoy::setKeys(std::string convoyKey,std::string dataKey)
 {
-  ConvoyKey = key ;
+  ConvoyKey = convoyKey               ;
+  DataKey   = dataKey                 ;
+  /////////////////////////////////////
+  if ( ConvoyKey . length ( ) > 0 )   {
+    Convoy::add  ( ConvoyKey , this ) ;
+  }                                   ;
+  /////////////////////////////////////
+  if ( DataKey   . length ( ) > 0 )   {
+    Convoy::join ( DataKey   , this ) ;
+  }                                   ;
 }
 
 std::string Convoy::Key(void) const
@@ -78,7 +73,30 @@ bool Convoy::Recycling(void)
 
 bool Convoy::Destructor(void)
 {
-  return true ;
+  if ( nullptr != this -> PrivatePacket )                        {
+    PrivateDestroyers * pd = (PrivateDestroyers *) PrivatePacket ;
+    if ( nullptr != pd -> manage )                               {
+      delete pd -> manage                                        ;
+      pd -> manage = nullptr                                     ;
+    }                                                            ;
+    delete pd                                                    ;
+    this -> PrivatePacket = nullptr                              ;
+  }                                                              ;
+  ////////////////////////////////////////////////////////////////
+  if ( nullptr != this -> PrivateGuard )                         {
+    ConvoyGuard * cg = (ConvoyGuard *) this -> PrivateGuard      ;
+    delete cg                                                    ;
+    this -> PrivateGuard = nullptr                               ;
+  }                                                              ;
+  ////////////////////////////////////////////////////////////////
+  if ( DataKey . length ( ) > 0 )                                {
+    Convoy::remove ( DataKey , (Destroyer *) this )              ;
+  }                                                              ;
+  ////////////////////////////////////////////////////////////////
+  if ( ConvoyKey . length ( ) > 0 )                              {
+    Convoy::remove ( ConvoyKey )                                 ;
+  }                                                              ;
+  return true                                                    ;
 }
 
 void * Convoy::Register(void *)

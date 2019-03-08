@@ -10,6 +10,7 @@ Destroyer:: Destroyer(void)
 
 Destroyer::~Destroyer(void)
 {
+  Destructor ( ) ;
 }
 
 bool Destroyer::Interrupt(void)
