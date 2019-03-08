@@ -69,9 +69,6 @@ size_t ManageDestroyers::add(Destroyer * destroyer)
   }                                      ;
   cnt   = Destroyers . size ( )          ;
   unlock                    ( )          ;
-  /////////////////////////////////////
-     printf("%s\n",__FUNCTION__) ;
-  /////////////////////////////////////
   return cnt                             ;
 }
 
@@ -81,13 +78,9 @@ size_t ManageDestroyers::remove(Destroyer * destroyer)
   lock                      ( )       ;
   if ( exists ( destroyer ) )         {
     Destroyers . remove ( destroyer ) ;
-            printf("Destroyers . remove\n") ;
   }                                   ;
   cnt   = Destroyers . size ( )       ;
   unlock                    ( )       ;
-  /////////////////////////////////////
-     printf("%s\n",__FUNCTION__) ;
-  /////////////////////////////////////
   return cnt                          ;
 }
 
