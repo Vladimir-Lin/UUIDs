@@ -1,6 +1,14 @@
 #include "UUIDs.hpp"
 #include "PrivateUUIDs.hpp"
 
+#pragma pack(push,1)
+
+#pragma pack(pop)
+
+#ifndef DONT_USE_NAMESPACE
+namespace PARALLEL_NAMESPACE {
+#endif
+
 typedef struct              {
   ManageDestroyers * manage ;
 } PrivateDestroyers         ;
@@ -159,6 +167,7 @@ int Convoy::Survived(void) const
 
 bool Convoy::add(std::string key,Convoy * convoy)
 {
+      printf("%s\n",__FUNCTION__) ;
   if ( nullptr == convoy ) return false ;
   StaticConvoy [ key ] = convoy         ;
   return true                           ;
@@ -166,6 +175,7 @@ bool Convoy::add(std::string key,Convoy * convoy)
 
 bool Convoy::remove(std::string key)
 {
+      printf("%s\n",__FUNCTION__) ;
   std::map<std::string,Convoy *>::iterator it      ;
   it = StaticConvoy . find ( key )                 ;
   if ( it == StaticConvoy . end ( ) ) return false ;
@@ -183,6 +193,7 @@ Convoy * Convoy::find(std::string key)
 
 int Convoy::join(std::string key,Destroyer * destroyer)
 {
+      printf("%s\n",__FUNCTION__) ;
   Convoy * convoy = Convoy::find ( key ) ;
   if ( nullptr == convoy ) return 0        ;
   return  convoy -> Join ( destroyer )     ;
@@ -190,7 +201,12 @@ int Convoy::join(std::string key,Destroyer * destroyer)
 
 int Convoy::remove(std::string key,Destroyer * destroyer)
 {
+      printf("%s\n",__FUNCTION__) ;
   Convoy * convoy = Convoy::find ( key ) ;
   if ( nullptr == convoy ) return 0        ;
   return  convoy -> Remove ( destroyer )   ;
 }
+
+#ifndef DONT_USE_NAMESPACE
+}
+#endif

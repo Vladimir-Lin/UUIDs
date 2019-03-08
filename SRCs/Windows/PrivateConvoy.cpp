@@ -1,6 +1,10 @@
 #include "UUIDs.hpp"
 #include "PrivateUUIDs.hpp"
 
+#ifndef DONT_USE_NAMESPACE
+namespace PARALLEL_NAMESPACE {
+#endif
+
 ManageDestroyers:: ManageDestroyers(void)
 {
   ::InitializeCriticalSection ( &mutex ) ;
@@ -69,6 +73,9 @@ size_t ManageDestroyers::add(Destroyer * destroyer)
   }                                      ;
   cnt   = Destroyers . size ( )          ;
   unlock                    ( )          ;
+  /////////////////////////////////////
+     printf("%s\n",__FUNCTION__) ;
+  /////////////////////////////////////
   return cnt                             ;
 }
 
@@ -78,9 +85,13 @@ size_t ManageDestroyers::remove(Destroyer * destroyer)
   lock                      ( )       ;
   if ( exists ( destroyer ) )         {
     Destroyers . remove ( destroyer ) ;
+            printf("Destroyers . remove\n") ;
   }                                   ;
   cnt   = Destroyers . size ( )       ;
   unlock                    ( )       ;
+  /////////////////////////////////////
+     printf("%s\n",__FUNCTION__) ;
+  /////////////////////////////////////
   return cnt                          ;
 }
 
@@ -98,3 +109,7 @@ void ManageDestroyers::discontinue(void)
     (*it) -> Interrupt ( )                                                ;
   }                                                                       ;
 }
+
+#ifndef DONT_USE_NAMESPACE
+}
+#endif

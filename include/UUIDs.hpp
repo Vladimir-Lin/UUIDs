@@ -60,6 +60,19 @@ UUIDs_EXPORT size_t tuidUnique      (void * unique,const void * block,size_t siz
 UUIDs_EXPORT void   suidReverse     (void * reverse,const void * block,size_t size) ;
 UUIDs_EXPORT void   tuidReverse     (void * reverse,const void * block,size_t size) ;
 
+#if !defined(PARALLEL_NAMESPACE)
+#define PARALLEL_NAMESPACE CIOS
+#endif
+
+// Debug
+#ifdef CIOSDEBUG
+
+#endif
+
+#ifndef DONT_USE_NAMESPACE
+namespace PARALLEL_NAMESPACE {
+#endif
+
 /****************************************************************************\
  *                                                                          *
  *  Destroyer is a class that helps to destroy any classes which does not   *
@@ -130,5 +143,9 @@ class UUIDs_EXPORT Convoy : public Destroyer
   private:
 
 } ;
+
+#ifndef DONT_USE_NAMESPACE
+}
+#endif
 
 #endif
