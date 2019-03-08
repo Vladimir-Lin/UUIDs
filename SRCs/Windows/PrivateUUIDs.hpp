@@ -14,15 +14,11 @@
 #include <list>
 #include <map>
 
-#ifndef DONT_USE_NAMESPACE
-namespace PARALLEL_NAMESPACE {
-#endif
-
 class ManageDestroyers
 {
   public:
 
-    std::list<CIOS::Destroyer *> Destroyers ;
+    std::list<Destroyer *> Destroyers ;
 
     explicit    ManageDestroyers (void) ;
     virtual    ~ManageDestroyers (void) ;
@@ -49,9 +45,5 @@ class ManageDestroyers
     CRITICAL_SECTION mutex ;
 
 } ;
-
-#ifndef DONT_USE_NAMESPACE
-}
-#endif
 
 #endif

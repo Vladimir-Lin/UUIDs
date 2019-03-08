@@ -5,10 +5,6 @@
 
 #pragma pack(pop)
 
-#ifndef DONT_USE_NAMESPACE
-namespace PARALLEL_NAMESPACE {
-#endif
-
 typedef struct              {
   ManageDestroyers * manage ;
 } PrivateDestroyers         ;
@@ -206,7 +202,3 @@ int Convoy::remove(std::string key,Destroyer * destroyer)
   if ( nullptr == convoy ) return 0        ;
   return  convoy -> Remove ( destroyer )   ;
 }
-
-#ifndef DONT_USE_NAMESPACE
-}
-#endif

@@ -1,10 +1,6 @@
 #include "UUIDs.hpp"
 #include "PrivateUUIDs.hpp"
 
-#ifndef DONT_USE_NAMESPACE
-namespace PARALLEL_NAMESPACE {
-#endif
-
 ManageDestroyers:: ManageDestroyers(void)
 {
   ::InitializeCriticalSection ( &mutex ) ;
@@ -109,7 +105,3 @@ void ManageDestroyers::discontinue(void)
     (*it) -> Interrupt ( )                                                ;
   }                                                                       ;
 }
-
-#ifndef DONT_USE_NAMESPACE
-}
-#endif

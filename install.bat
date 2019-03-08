@@ -18,7 +18,7 @@ cmd /A /Q /K %UUIDS%\scripts\install.bat x64 release shared
 cmd /A /Q /K %UUIDS%\scripts\install.bat x64 debug   static
 cmd /A /Q /K %UUIDS%\scripts\install.bat x64 debug   shared
 
-xcopy /Y %UUIDS%\include\UUIDs.hpp %CIOSPATH%\include\UUIDs.hpp
+xcopy /Y %UUIDS%\include\UUIDs.hpp %CIOS%\include\UUIDs.hpp
 
 cd %ORIGINAL%
 rd /S /Q %COMPILEPATH%
