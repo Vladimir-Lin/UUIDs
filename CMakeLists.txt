@@ -54,8 +54,10 @@ set(HEADERS include/UUIDs.hpp SRCs/Windows/PrivateUUIDs.hpp)
 set(CORES
   SRCs/UUIDs.cpp
   SRCs/nDestroyer.cpp
+  SRCs/nEnabler.cpp
   SRCs/Convoy.cpp
-  SRCs/Windows/PrivateConvoy.cpp)
+  SRCs/Windows/PrivateConvoy.cpp
+  SRCs/Windows/PrivateEnabler.cpp)
 
 # Handling pkg-config file
 configure_file(UUIDs.pc.in UUIDs.pc @ONLY)

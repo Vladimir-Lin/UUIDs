@@ -23,6 +23,7 @@
 #include <stdint.h>
 #include <stdio.h>
 
+#include <list>
 #include <string>
 
 typedef int64_t  TUID ;
@@ -132,6 +133,56 @@ class UUIDs_EXPORT Convoy : public Destroyer
     void      * PrivateGuard  ;
     std::string ConvoyKey     ;
     std::string DataKey       ;
+
+  private:
+
+} ;
+
+/****************************************************************************\
+ *                                                                          *
+ *                                  Enabler                                 *
+ *                                                                          *
+\****************************************************************************/
+
+class UUIDs_EXPORT Enabler
+{
+  public:
+
+    explicit       Enabler     (bool lock = false) ;
+    virtual       ~Enabler     (void) ;
+
+    virtual bool   setEnabled  (int Id,bool enable) ;
+    virtual bool   hasEnabled  (int Id) ;
+    virtual bool   isEnabled   (int Id) ;
+
+    virtual bool & operator [] (int Id) ;
+
+    virtual bool   setEnabled  (SUID Id,bool enable) ;
+    virtual bool   hasEnabled  (SUID Id) ;
+    virtual bool   isEnabled   (SUID Id) ;
+
+    virtual bool & operator [] (SUID Id) ;
+
+    virtual bool   setEnabled  (std::string Id,bool enable) ;
+    virtual bool   hasEnabled  (std::string Id) ;
+    virtual bool   isEnabled   (std::string Id) ;
+
+    virtual bool & operator [] (std::string Id) ;
+
+    virtual bool   isAllTrue   (void) ;
+    virtual bool   isAllFalse  (void) ;
+
+    virtual bool   canLock     (void) ;
+    virtual bool   setLock     (bool lock) ;
+
+    virtual void   clear       (void) ;
+
+    void           lock        (void) ;
+    void           unlock      (void) ;
+
+  protected:
+
+    void      * PrivatePacket ;
 
   private:
 

@@ -46,4 +46,37 @@ class ManageDestroyers
 
 } ;
 
+class PrivateEnabler
+{
+  public:
+
+    bool                       shouldLock       ;
+
+    std::map<int        ,bool> PrivateEnablings ;
+    std::map<SUID       ,bool> UuidEnablings    ;
+    std::map<std::string,bool> StringEnablings  ;
+
+    explicit PrivateEnabler (void) ;
+    virtual ~PrivateEnabler (void) ;
+
+    void     lock           (void) ;
+    void     unlock         (void) ;
+
+    void     clear          (void) ;
+
+    bool     hasEnabled     (int Id) ;
+    bool     hasEnabled     (SUID Id) ;
+    bool     hasEnabled     (std::string Id) ;
+
+    bool     isAllTrue      (void) ;
+    bool     isAllFalse     (void) ;
+
+  protected:
+
+  private:
+
+    CRITICAL_SECTION mutex ;
+
+} ;
+
 #endif

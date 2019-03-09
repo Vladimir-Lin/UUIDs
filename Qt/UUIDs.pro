@@ -18,8 +18,10 @@ HEADERS     += $$SRCPATH/Windows/PrivateUUIDs.hpp
 
 SOURCES     += $$SRCPATH/UUIDs.cpp
 SOURCES     += $$SRCPATH/nDestroyer.cpp
+SOURCES     += $$SRCPATH/nEnabler.cpp
 SOURCES     += $$SRCPATH/Convoy.cpp
 SOURCES     += $$SRCPATH/Windows/PrivateConvoy.cpp
+SOURCES     += $$SRCPATH/Windows/PrivateEnabler.cpp
 
 OTHER_FILES += $$SRCROOT/CMakeLists.txt
 OTHER_FILES += $$SRCROOT/*.bat
