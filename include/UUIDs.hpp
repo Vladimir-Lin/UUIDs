@@ -182,7 +182,7 @@ class UUIDs_EXPORT Enabler
 
   protected:
 
-    void      * PrivatePacket ;
+    void * PrivatePacket ;
 
   private:
 
