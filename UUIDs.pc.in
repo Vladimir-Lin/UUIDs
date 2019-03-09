@@ -6,7 +6,7 @@ file=${libdir}/${lib}
 
 Name: UUIDs
 Version: @VERSION@
-Description: CIOS version of SUID/UUIDs operations
+Description: Generic SUID/UUIDs System Supports for CIOS
 URL: https://github.com/Vladimir-Lin/UUIDs
 Libs: -L${libdir} -l${name}
 Cflags: -I${includedir}
